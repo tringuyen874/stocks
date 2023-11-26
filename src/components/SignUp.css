@@ -1,0 +1,119 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    margin-top: 200px;
+    background: white;
+    padding-bottom: 30px;
+    width: 600px;
+    /* align-items: center;
+    justify-content: center;
+    height: 100vh; */
+}
+.header{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* justify-content: center; */
+    margin-top: 30px;
+    width: 100%;
+    gap: 9px;
+}
+
+.text{
+    font-size: 48px;
+    font-weight: 700;
+    color: #3c009d;
+}
+
+.underline{
+    width: 61px;
+    height: 6px;
+    background: #3c009d;
+    border-radius: 10px;
+}
+
+.inputs{
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    /* justify-content: center; */
+    margin-top: 55px;
+    gap: 25px;
+}
+
+.input{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* justify-content: center; */
+    /* gap: 5px; */
+    background: #eaeaea;
+    width: 480px;
+    margin: auto;
+    height: 80px;
+    border-radius: 6px;
+}
+
+.input img{
+    margin: 0px 30px;
+}
+
+.input input{
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 19px;
+    /* font-weight: 400; */
+    color: #797979;
+    width: 400px;
+    height: 50px;
+}
+
+.forgot-password{
+    /* display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    margin-right: 30px; */
+    margin-top: 27px;
+    padding-left: 62px;
+    font-size: 18px;
+    color: #797979;
+}
+
+.forgot-password span{
+    color: #3c009d;
+    /* text-decoration: none; */
+    cursor: pointer;
+}
+
+.submit-container{
+    display: flex;
+    /* flex-direction: column;
+    align-items: center;
+    justify-content: center; */
+    margin: 60px auto;
+    gap: 30px;
+}
+
+.submit{
+    display: flex;
+    /* flex-direction: column; */
+    align-items: center;
+    justify-content: center;
+    background: #4c00b4;
+    width: 220px;
+    height: 59px;
+    border-radius: 50px;
+    cursor: pointer;
+    color: #fff;
+    font-size: 19px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.gray{
+    background: #EAEAEA;
+    color: #676767;
+}

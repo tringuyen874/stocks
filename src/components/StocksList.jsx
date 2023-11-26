@@ -1,7 +1,7 @@
-import React from 'react'
+import React from 'react';
 import { Detector } from "react-detect-offline";
-import StockRow from './StockRow.jsx'
-import MarketTrendArrow from './MarketTrendArrow.jsx'
+import MarketTrendArrow from './MarketTrendArrow.jsx';
+import StockRow from './StockRow.jsx';
 
 const StocksList = (props) => {
   return (
@@ -33,6 +33,7 @@ const StocksList = (props) => {
               </th>
               <th>History</th>
               <th>Updated At</th>
+              <th>Buy/Sell</th>
             </tr>
           </thead>
           <tbody>
