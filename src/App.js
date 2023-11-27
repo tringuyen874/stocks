@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
+// import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 import './App.css';
-// import Dashboard from './components/Dashboard.jsx';
-import SignUp from './components/SignUp.jsx';
+import Dashboard from './components/Dashboard.jsx';
 import UnsafeScriptsWarning from "./components/UnsafeScriptsWarning";
 
 class App extends Component {
@@ -32,9 +32,18 @@ class App extends Component {
     }
     return (
       <div className="App">
-        {/* <Dashboard hideSpinner={this.hideSpinner} showSpinner={this.state.showSpinner} /> */}
-        <SignUp/>
+        <Dashboard hideSpinner={this.hideSpinner} showSpinner={this.state.showSpinner} />
+        {/* <SignUp/> */}
       </div>
+      // <Router>
+      //   <div className="App">
+      //     <Routes>
+      //       <Route path="/signup" component={SignUp} />
+      //       <Route path="/dashboard" component={Dashboard} />
+      //       {/* Add more routes as needed */}
+      //     </Routes>
+      //   </div>
+      // </Router>
     );
   }
 }

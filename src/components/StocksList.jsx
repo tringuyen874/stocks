@@ -33,7 +33,8 @@ const StocksList = (props) => {
               </th>
               <th>History</th>
               <th>Updated At</th>
-              <th>Buy/Sell</th>
+              <th>Action</th>
+              {/* <th>Buy/Sell</th> */}
             </tr>
           </thead>
           <tbody>
@@ -42,10 +43,15 @@ const StocksList = (props) => {
                 let current_stock = props.stocks[stock_name];
                 return (
                   <StockRow
-                    key={index} stock_name={stock_name}
+                    key={index} 
+                    stock_name={stock_name}
                     stock_data={current_stock}
                     toggleStockSelection={props.toggleStockSelection}
-                  />
+                  >
+                    <button>Button</button>
+                  </StockRow>
+                  
+                  
                 )
               }
             )}

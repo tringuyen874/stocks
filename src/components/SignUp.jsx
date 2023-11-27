@@ -64,7 +64,7 @@ class SignUp extends React.Component {
                         className={action === 'Login' ? 'submit gray' : 'submit'}
                         onClick={() => {
                             this.setState({ action: 'Sign Up' });
-                            const data = { username: this.state.username, password: this.state.password };
+                            const data = { username: this.state.username, password: this.state.password, email: this.state.email };
 
                             fetch('https://api.example.com/signup', {
                                 method: 'POST',

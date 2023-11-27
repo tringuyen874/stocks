@@ -1,6 +1,6 @@
-import React from 'react'
+import React from 'react';
 import { Sparklines, SparklinesLine } from 'react-sparklines';
-import TimeAgo from 'react-timeago'
+import TimeAgo from 'react-timeago';
 
 class StockRow extends React.Component {
 
@@ -31,6 +31,10 @@ class StockRow extends React.Component {
         </td>
         <td className='updated_at'>
           <TimeAgo date={ history.slice(-1)[0].time } />
+        </td>
+        <td>
+          <button className='buy'>Buy</button>
+          <button className='sell'>Sell</button>
         </td>
       </tr>
     );

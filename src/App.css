@@ -18,9 +18,12 @@
 }
 #stocks_list table{
   width: 100%;
+  
   margin: 3px;
 }
-
+#stocks_list {
+  width: 35%;
+}
 .red{
   color: red;
 }
