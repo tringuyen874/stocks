@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.model.User;
@@ -33,9 +34,15 @@ public class UserController {
         return userService.getUserById(id);
     }
 
-    @GetMapping("/users/name/{userName}")
-    public List<User> getUserByName(@PathVariable String userName) {
-        return userService.getUserByName(userName);
+    @GetMapping("/users/name")
+    public User getUserByName(@RequestParam String userName,@RequestParam String password) {
+        // String userName = user.getUserName();
+        User user = userService.getUserByName(userName);
+        if(user.getPassword().equals(password)){
+            return user;
+        }
+        return null;
+        // return userService.getUserByName(userName);
     }
 
     @PostMapping("/users")

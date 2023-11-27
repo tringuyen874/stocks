@@ -35,19 +35,20 @@ class SignUp extends React.Component {
                     <div className='underline'></div>
                 </div>
                 <div className='inputs'>
+                    <div className='input'>
+                        <img src={user_icon} alt='' />
+                        <input type='text' name='userName'  placeholder='username' value={this.state.userName} onChange={this.handleInputChange}/>
+                    </div>
                     {action === 'Login' ? (
                         <div></div>
                     ) : (
                         <div className='input'>
-                            <img src={user_icon} alt='' />
-                            <input type='text' name='userName'  placeholder='username' value={this.state.userName} onChange={this.handleInputChange}/>
+                            <img src={email_icon} alt='' />
+                            <input type='email' name='email'  placeholder='Email' value={this.state.email} onChange={this.handleInputChange}/>
                         </div>
                     )}
 
-                    <div className='input'>
-                        <img src={email_icon} alt='' />
-                        <input type='email' name='email'  placeholder='Email' value={this.state.email} onChange={this.handleInputChange}/>
-                    </div>
+                    
                     <div className='input'>
                         <img src={password_icon} alt='' />
                         <input type='password' name='password'  placeholder='Password' value={this.state.password} onChange={this.handleInputChange}/>
@@ -67,7 +68,10 @@ class SignUp extends React.Component {
                         onClick={() => {
                             this.setState({ action: 'Sign Up' });
                             const data = { userName: this.state.userName, password: this.state.password, email: this.state.email };
-
+                            if (data.userName === '' || data.password === '' || data.email === '') {
+                                // alert('Please fill in all the fields');
+                                return;
+                            }
                             fetch('http://localhost:8087/api/users', {
                                 method: 'POST',
                                 headers: {
@@ -81,7 +85,7 @@ class SignUp extends React.Component {
                                 }
                                 console.log(response);
                                 return response.text();
-                              })
+                            })
                             .then(data => {
                                 if (data) {
                                     const jsonData = JSON.parse(data);
@@ -103,24 +107,37 @@ class SignUp extends React.Component {
                         onClick={() => {
                             this.setState({ action: 'Login' });
                             const data = { userName: this.state.userName, password: this.state.password };
-
-                            fetch('https://api.example.com/login', {
-                                method: 'POST',
+                            if (data.userName === '' || data.password === '' ) {
+                                // alert('Please fill in all the fields');
+                                return;
+                            }
+                            const params = new URLSearchParams({
+                                userName: this.state.userName,
+                                password: this.state.password,
+                              });
+                            fetch(`http://localhost:8087/api/users/name?${params.toString()}`, {
+                                method: 'GET',
                                 headers: {
                                 'Content-Type': 'application/json',
                                 },
-                                body: JSON.stringify(data),
+                                // body: JSON.stringify(data),
                             })
                             .then(response => {
                                 if (!response.ok) {
                                   throw new Error(`HTTP error! status: ${response.status}`);
                                 }
+                                console.log(response);
                                 return response.json();
                               })
                             .then(data => {
                                 // Handle the response data here
-                                console.log('Success:', data);
-                                this.props.history.push('/dashboard');
+                                if (data) {
+                                    // const jsonData = JSON.parse(data);
+                                    // Handle the JSON data here
+                                    console.log('Success:', data);
+                                }
+                                // this.props.navigate('/dashboard');
+                                this.props.navigate('/dashboard');
                             })
                             .catch((error) => {
                                 console.error('Error:', error);

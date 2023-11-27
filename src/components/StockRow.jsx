@@ -17,11 +17,13 @@ class StockRow extends React.Component {
   }
   handleBuyClick = () => {
     console.log('Buy button clicked');
+    this.setState({ showModal: true });
     // Add your buy logic here
   }
 
   handleSellClick = () => {
     console.log('Sell button clicked');
+    this.setState({ showModal: true });
     // Add your sell logic here
   }
 
@@ -44,6 +46,22 @@ class StockRow extends React.Component {
         <td>
           <button className='buy' onClick={this.handleBuyClick}>Buy</button>
           <button className='sell' onClick={this.handleSellClick}>Sell</button>
+          <Modal
+            isOpen={this.state.showModal}
+            onRequestClose={this.closeModal}
+            contentLabel="Example Modal"
+          >
+            <h2>Hello</h2>
+            <button onClick={this.closeModal}>close</button>
+            <div>I am a modal</div>
+            <form>
+              <input />
+              <button>tab navigation</button>
+              <button>stays</button>
+              <button>inside</button>
+              <button>the modal</button>
+            </form>
+          </Modal>
         </td>
       </tr>
     );
