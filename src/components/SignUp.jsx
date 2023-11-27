@@ -1,9 +1,10 @@
 import React from 'react';
-import './SignUp.css'; // Tell Webpack that SignUp.js uses these styles
-
+// import './SignUp.css'; // Tell Webpack that SignUp.js uses these styles
+import { useNavigate } from 'react-router-dom';
 import email_icon from './Assets/email.png'; // Tell Webpack this JS file uses this image
 import password_icon from './Assets/password.png'; // Tell Webpack this JS file uses this image
 import user_icon from './Assets/person.png'; // Tell Webpack this JS file uses this image
+import './SignUp.css'; // Tell Webpack that SignUp.js uses these styles
 
 
 
@@ -12,10 +13,11 @@ class SignUp extends React.Component {
         super(props);
         this.state = {
             action: 'Sign Up',
-            username: '',
+            userName: '',
             email: '',
             password: '',
         };
+        this.handleInputChange = this.handleInputChange.bind(this);
     }
     handleInputChange(event) {
         this.setState({
@@ -25,7 +27,7 @@ class SignUp extends React.Component {
 
     render() {
         const { action } = this.state;
-
+        // const navigation = useNavigate();
         return (
             <div className='container'>
                 <div className='header'>
@@ -38,17 +40,17 @@ class SignUp extends React.Component {
                     ) : (
                         <div className='input'>
                             <img src={user_icon} alt='' />
-                            <input type='text' placeholder='Username' value={this.state.username} onChange={this.handleInputChange}/>
+                            <input type='text' name='userName'  placeholder='username' value={this.state.userName} onChange={this.handleInputChange}/>
                         </div>
                     )}
 
                     <div className='input'>
                         <img src={email_icon} alt='' />
-                        <input type='email' placeholder='Email' value={this.state.email} onChange={this.handleInputChange}/>
+                        <input type='email' name='email'  placeholder='Email' value={this.state.email} onChange={this.handleInputChange}/>
                     </div>
                     <div className='input'>
                         <img src={password_icon} alt='' />
-                        <input type='password' placeholder='Password' value={this.state.password} onChange={this.handleInputChange}/>
+                        <input type='password' name='password'  placeholder='Password' value={this.state.password} onChange={this.handleInputChange}/>
                     </div>
                 </div>
                 {action === 'Sign Up' ? (
@@ -64,19 +66,30 @@ class SignUp extends React.Component {
                         className={action === 'Login' ? 'submit gray' : 'submit'}
                         onClick={() => {
                             this.setState({ action: 'Sign Up' });
-                            const data = { username: this.state.username, password: this.state.password, email: this.state.email };
+                            const data = { userName: this.state.userName, password: this.state.password, email: this.state.email };
 
-                            fetch('https://api.example.com/signup', {
+                            fetch('http://localhost:8087/api/users', {
                                 method: 'POST',
                                 headers: {
                                 'Content-Type': 'application/json',
                                 },
                                 body: JSON.stringify(data),
                             })
-                            .then(response => response.json())
+                            .then(response => {
+                                if (!response.ok) {
+                                  throw new Error(`HTTP error! status: ${response.status}`);
+                                }
+                                console.log(response);
+                                return response.text();
+                              })
                             .then(data => {
-                                // Handle the response data here
-                                console.log('Success:', data);
+                                if (data) {
+                                    const jsonData = JSON.parse(data);
+                                    // Handle the JSON data here
+                                    console.log('Success:', jsonData);
+                                }
+                                // this.props.navigate('/dashboard');
+                                this.props.navigate('/dashboard');
                             })
                             .catch((error) => {
                                 console.error('Error:', error);
@@ -89,7 +102,7 @@ class SignUp extends React.Component {
                         className={action === 'Sign Up' ? 'submit gray' : 'submit'}
                         onClick={() => {
                             this.setState({ action: 'Login' });
-                            const data = { username: this.state.username, password: this.state.password };
+                            const data = { userName: this.state.userName, password: this.state.password };
 
                             fetch('https://api.example.com/login', {
                                 method: 'POST',
@@ -98,10 +111,16 @@ class SignUp extends React.Component {
                                 },
                                 body: JSON.stringify(data),
                             })
-                            .then(response => response.json())
+                            .then(response => {
+                                if (!response.ok) {
+                                  throw new Error(`HTTP error! status: ${response.status}`);
+                                }
+                                return response.json();
+                              })
                             .then(data => {
                                 // Handle the response data here
                                 console.log('Success:', data);
+                                this.props.history.push('/dashboard');
                             })
                             .catch((error) => {
                                 console.error('Error:', error);
@@ -115,26 +134,31 @@ class SignUp extends React.Component {
         );
     }
 }
+const SignUpWithNavigate = (props) => {
+    const navigate = useNavigate();
+  
+    return <SignUp {...props} navigate={navigate} />;
+  };
 
-export default SignUp;
+export default SignUpWithNavigate;
 
 // function SignUp() {
-//   const [username, setUsername] = useState('');
+//   const [userName, setuserName] = useState('');
 //   const [email, setEmail] = useState('');
 //   const [password, setPassword] = useState('');
 
 //   const handleSubmit = (event) => {
 //     event.preventDefault();
 //     // Handle form submission logic here
-//     console.log(`Username: ${username}, Email: ${email}, Password: ${password}`);
+//     console.log(`userName: ${userName}, Email: ${email}, Password: ${password}`);
 //   };
 
 //   return (
 //     <form onSubmit={handleSubmit}>
 //       <h2>Sign Up</h2>
 //       <label>
-//         Username:
-//         <input type="text" value={username} onChange={e => setUsername(e.target.value)} required />
+//         userName:
+//         <input type="text" value={userName} onChange={e => setuserName(e.target.value)} required />
 //       </label>
 //       <label>
 //         Email:

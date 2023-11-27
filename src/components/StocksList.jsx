@@ -19,6 +19,7 @@ const StocksList = (props) => {
           />
           &nbsp;
           <button className='button is-small' onClick={props.resetData}>Clear history</button>
+          <button className='button is-small'>Your Stocks</button>
         </div>
       </div>
       <div className='card-content'>

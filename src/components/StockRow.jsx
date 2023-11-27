@@ -15,6 +15,15 @@ class StockRow extends React.Component {
       return null;
     }
   }
+  handleBuyClick = () => {
+    console.log('Buy button clicked');
+    // Add your buy logic here
+  }
+
+  handleSellClick = () => {
+    console.log('Sell button clicked');
+    // Add your sell logic here
+  }
 
   render() {
     let history = this.props.stock_data.history;
@@ -33,8 +42,8 @@ class StockRow extends React.Component {
           <TimeAgo date={ history.slice(-1)[0].time } />
         </td>
         <td>
-          <button className='buy'>Buy</button>
-          <button className='sell'>Sell</button>
+          <button className='buy' onClick={this.handleBuyClick}>Buy</button>
+          <button className='sell' onClick={this.handleSellClick}>Sell</button>
         </td>
       </tr>
     );
