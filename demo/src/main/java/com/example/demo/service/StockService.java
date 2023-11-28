@@ -18,7 +18,7 @@ public class StockService {
     private EntityManager entityManager;
 
     public Stock getStockById(long id) {
-        return stockRepository.findById(id).get();
+        return stockRepository.findById((int) id).get();
     }
 
     public void saveOrUpdate(Stock stock) {
@@ -26,6 +26,6 @@ public class StockService {
     }
 
     public void delete(long id) {
-        stockRepository.deleteById(id);
+        stockRepository.deleteById((int) id);
     }
 }

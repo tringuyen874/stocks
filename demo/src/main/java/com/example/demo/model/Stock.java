@@ -1,14 +1,22 @@
 package com.example.demo.model;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.*;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.util.Set;
 
 @Getter
 @Setter
@@ -38,8 +46,12 @@ public class Stock {
     @Column(name = "sell_at")
     private String sellAt;
 
-    @OneToMany(mappedBy = "stock",cascade = CascadeType.REMOVE)
+    // @OneToMany(mappedBy = "stock",cascade = CascadeType.REMOVE)
+    // @JsonIgnore
+    // Set<UserStock> userStock;
+
     @JsonIgnore
-    Set<UserStock> userStock;
+    @ManyToMany(mappedBy = "stocks")
+    private Set<User> users = new HashSet<>();
 
 }

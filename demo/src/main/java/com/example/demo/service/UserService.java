@@ -25,7 +25,7 @@ public class UserService {
     }
 
     public User getUserById(long id) {
-        return userRepository.findById(id).get();
+        return userRepository.findById((int) id).get();
     }
 
     public User getUserByName(String userName) {
@@ -37,6 +37,6 @@ public class UserService {
     }
 
     public void delete(long id) {
-        userRepository.deleteById(id);
+        userRepository.deleteById((int) id);
     }
 }

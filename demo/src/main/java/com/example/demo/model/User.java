@@ -1,14 +1,25 @@
 package com.example.demo.model;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.*;
+
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.util.Set;
 
 @Getter
 @Setter
@@ -23,8 +34,8 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-//    @Column(name = "user_name")
-@Column(name = "name")
+    // @Column(name = "user_name")
+    @Column(name = "name")
     private String userName;
 
     @Column(name = "password")
@@ -39,9 +50,14 @@ public class User {
         this.password = password;
         this.email = email;
     }
-    @OneToMany(mappedBy = "user",cascade = CascadeType.REMOVE)
+    // @OneToMany(mappedBy = "user",cascade = CascadeType.REMOVE)
+    // @JsonIgnore
+    // Set<UserStock> userStock;
+
     @JsonIgnore
-    Set<UserStock> userStock;
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "user_stock", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "stock_id"))
+    private Set<Stock> stocks = new HashSet<>();
 
     @Override
     public String toString() {
