@@ -1,16 +1,14 @@
 package com.example.demo.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.Set;
 
 @Getter
 @Setter
@@ -19,13 +17,13 @@ import lombok.Setter;
 @AllArgsConstructor
 
 @Entity
-@Table(name = "stocks")
+@Table(name = "stock")
 public class Stock {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private int id;
 
-    @Column(name = "stock_name")
+    @Column(name = "name")
     private String stockName;
 
     @Column(name = "stock_price")
@@ -39,5 +37,9 @@ public class Stock {
 
     @Column(name = "sell_at")
     private String sellAt;
+
+    @OneToMany(mappedBy = "stock",cascade = CascadeType.REMOVE)
+    @JsonIgnore
+    Set<UserStock> userStock;
 
 }

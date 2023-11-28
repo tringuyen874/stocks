@@ -1,16 +1,14 @@
 package com.example.demo.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.Set;
 
 @Getter
 @Setter
@@ -18,14 +16,15 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "users")
+@Table(name = "user")
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private int id;
 
-    @Column(name = "user_name")
+//    @Column(name = "user_name")
+@Column(name = "name")
     private String userName;
 
     @Column(name = "password")
@@ -40,6 +39,9 @@ public class User {
         this.password = password;
         this.email = email;
     }
+    @OneToMany(mappedBy = "user",cascade = CascadeType.REMOVE)
+    @JsonIgnore
+    Set<UserStock> userStock;
 
     @Override
     public String toString() {
