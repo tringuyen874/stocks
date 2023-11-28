@@ -29,7 +29,7 @@ public class UserService {
     }
 
     public User getUserByName(String userName) {
-        return userRepository.findByUserName(userName);
+        return userRepository.findByUsername(userName).get();
     }
 
     public void saveOrUpdate(User user) {

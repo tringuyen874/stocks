@@ -29,6 +29,7 @@ import lombok.Setter;
 public class Stock {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "stock_id")
     private int id;
 
     @Column(name = "name")
